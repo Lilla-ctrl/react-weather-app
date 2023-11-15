@@ -10,6 +10,7 @@ export default function App() {
           <a
             href="https://github.com/Lilla-ctrl/react-weather-app"
             target="_blank"
+            rel="noreferrer"
           >
             open-source code
           </a>{" "}
