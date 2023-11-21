@@ -50,9 +50,3 @@
   top: -34px;
   margin-left: 5px;
 }
-
-.Weather .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
