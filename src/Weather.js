@@ -15,8 +15,7 @@ export default function Weather(props) {
       humidity: response.data.temperature.humidity,
       city: response.data.city,
       description: response.data.condition.description,
-      icon_url:
-        "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png",
+      icon_url: `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
       date: new Date(response.data.time * 1000),
     });
   }
