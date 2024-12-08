@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function WeatherIcon() {
-  return (
-    <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" />
-  );
+export default function WeatherIcon(props) {
+  const imgsrc = `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${props.code}.png`;
+
+  return <img src={imgsrc} />;
 }
