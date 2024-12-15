@@ -20,6 +20,8 @@ export default function WeatherForecast(props) {
       tempmin: response.data.daily[0].temperature.minimum,
       tempmax: response.data.daily[0].temperature.maximum,
       date: new Date(response.data.daily[0].time * 1000),
+      icon: response.data.daily[0].condition.icon,
+      description: response.data.daily[0].condition.description,
     });
     setLoaded(true);
   }
