@@ -7,7 +7,7 @@ export default function App() {
       <div className="container">
         <Weather defaultCity="New York" />
         <footer>
-          Coded by Lilla Berényi,{" "}
+          Coded by Lilla,{" "}
           <a
             href="https://github.com/Lilla-ctrl/react-weather-app"
             target="_blank"

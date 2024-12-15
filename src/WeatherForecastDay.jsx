@@ -1,10 +1,12 @@
+import FormattedDate from "./FormattedDate";
 import WeatherIcon from "./WeatherIcon";
 
 export default function WeatherForecastDay(props) {
-  console.log(props.icon);
   return (
     <div className="col">
-      <div className="Forecast-day">Thu</div>{" "}
+      <div className="Forecast-day">
+        <FormattedDate date={props.data.date} />
+      </div>{" "}
       <WeatherIcon code={props.data.icon} alt={props.data.description} />{" "}
       <div className="Forecast-temperature">
         <span className="Forecast-temperature-max">
