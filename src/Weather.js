@@ -22,7 +22,7 @@ export default function Weather(props) {
   }
 
   function search() {
-    const apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
+    let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
@@ -30,6 +30,11 @@ export default function Weather(props) {
   function handleSubmit(event) {
     event.preventDefault();
     search();
+  }
+
+  function handleLocation() {
+    
+    alert("Location!")
   }
 
   function handleCityChange(event) {
@@ -41,7 +46,7 @@ export default function Weather(props) {
       <div className="Weather">
         <form onSubmit={handleSubmit}>
           <div className="row">
-            <div className="col-9">
+            <div className="col-6">
               <input
                 type="search"
                 placeholder="Enter a city!"
@@ -50,12 +55,22 @@ export default function Weather(props) {
                 onChange={handleCityChange}
               />
             </div>
-            <div className="col-3">
-              <input
-                type="submit"
-                value="Search"
-                className="btn btn-primary w-100"
-              />
+            <div className="row mt-3">
+              <div className="col-3">
+                <input
+                  type="submit"
+                  value="Search"
+                  className="btn btn-primary w-100"
+                />
+              </div>
+              <div className="col-3">
+                <input
+                  type="submit"
+                  value="Location"
+                  className="btn btn-primary w-100"
+                  onClick={handleLocation}
+                />
+              </div>
             </div>
           </div>
         </form>
