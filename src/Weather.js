@@ -8,6 +8,10 @@ export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(searchLocation);
+  }, []);
+
   function handleResponse(response) {
     setWeatherData({
       ready: true,
@@ -43,7 +47,14 @@ export default function Weather(props) {
     let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
     let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
 
-    axios.get(apiUrl).then(handleResponse);
+    axios
+      .get(apiUrl)
+      .then(handleResponse)
+      .catch((error) => {
+        setWeatherData({ ready: false });
+        alert("Too many requests - please try again in a moment.");
+        console.error("API error:", error);
+      });
   }
 
   function handleCityChange(event) {
@@ -74,7 +85,7 @@ export default function Weather(props) {
               </div>
               <div className="col-3">
                 <input
-                  type="submit"
+                  type="button"
                   value="Location"
                   className="btn btn-primary w-100"
                   onClick={handleLocation}
@@ -88,7 +99,6 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    search();
     return "Loading...";
   }
 }
