@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
@@ -7,10 +7,6 @@ import "./Weather.css";
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(searchLocation);
-  }, []);
 
   function handleResponse(response) {
     setWeatherData({
@@ -41,7 +37,7 @@ export default function Weather(props) {
     navigator.geolocation.getCurrentPosition(searchLocation);
   }
 
-  function searchLocation(position) {
+  const searchLocation = useCallback((position) => {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
@@ -52,10 +48,14 @@ export default function Weather(props) {
       .then(handleResponse)
       .catch((error) => {
         setWeatherData({ ready: false });
-        alert("Too many requests - please try again in a moment.");
+        alert("Too many attempts - please try again in a moment.");
         console.error("API error:", error);
       });
-  }
+  }, []);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(searchLocation);
+  }, [searchLocation]);
 
   function handleCityChange(event) {
     setCity(event.target.value);
@@ -80,14 +80,14 @@ export default function Weather(props) {
                 <input
                   type="submit"
                   value="Search"
-                  className="btn btn-primary w-100"
+                  className="btn btn-secondary w-100"
                 />
               </div>
               <div className="col-3">
                 <input
                   type="button"
                   value="Location"
-                  className="btn btn-primary w-100"
+                  className="btn btn-secondary w-100"
                   onClick={handleLocation}
                 />
               </div>
