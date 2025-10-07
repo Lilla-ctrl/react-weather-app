@@ -8,7 +8,27 @@ export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
 
-  function handleResponse(response) {
+  async function fetchTimezone(coordinates) {
+    const { latitude, longitude } = coordinates;
+    const apiKey = "XY4MU30QAOSW";
+
+    try {
+      const res = await fetch(
+        `https://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
+      );
+      const data = await res.json();
+      console.log("TimeZoneDB response:", data);
+      return data.zoneName || "UTC";
+    } catch (err) {
+      console.error("Timezone fetch error:", err);
+      return "UTC";
+    }
+  }
+
+  async function handleResponse(response) {
+    const coordinates = response.data.coordinates;
+    const zoneName = await fetchTimezone(coordinates);
+
     setWeatherData({
       ready: true,
       temperature: response.data.temperature.current,
@@ -17,7 +37,8 @@ export default function Weather(props) {
       city: response.data.city,
       description: response.data.condition.description,
       icon: response.data.condition.icon,
-      date: new Date(response.data.time * 1000),
+      coordinates,
+      timezone: zoneName,
     });
   }
 
