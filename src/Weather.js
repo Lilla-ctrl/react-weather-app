@@ -7,6 +7,7 @@ import "./Weather.css";
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
+  const [timezoneCache, setTimezoneCache] = useState({});
 
   async function fetchTimezone(coordinates) {
     const { latitude, longitude } = coordinates;
@@ -27,7 +28,20 @@ export default function Weather(props) {
 
   async function handleResponse(response) {
     const coordinates = response.data.coordinates;
-    const zoneName = await fetchTimezone(coordinates);
+    const cityName = response.data.city;
+
+    let zoneName;
+
+    if (timezoneCache[cityName]) {
+      zoneName = timezoneCache[cityName];
+    } else {
+      zoneName = await fetchTimezone(coordinates);
+
+      setTimezoneCache((prev) => ({
+        ...prev,
+        [cityName]: zoneName,
+      }));
+    }
 
     setWeatherData({
       ready: true,
