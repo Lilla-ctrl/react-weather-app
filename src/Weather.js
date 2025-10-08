@@ -1,7 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
-import WeatherTemperature from "./WeatherTemperature";
 import axios from "axios";
 import "./Weather.css";
 
@@ -10,6 +9,7 @@ export default function Weather(props) {
   const [city, setCity] = useState(props.defaultCity);
   const [timezoneCache, setTimezoneCache] = useState({});
   const [unit, setUnit] = useState("celsius");
+  const [weatherSource, setWeatherSource] = useState("location");
 
   async function fetchTimezone(coordinates) {
     const { latitude, longitude } = coordinates;
@@ -68,11 +68,13 @@ export default function Weather(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setWeatherSource("city");
     search();
   }
 
   function handleLocation(event) {
     event.preventDefault();
+    setWeatherSource("location");
     navigator.geolocation.getCurrentPosition(searchLocation);
   }
 
@@ -96,14 +98,14 @@ export default function Weather(props) {
   );
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(searchLocation);
-  }, [searchLocation]);
+    if (weatherSource === "location") {
+      navigator.geolocation.getCurrentPosition(searchLocation);
+    }
+  }, [searchLocation, weatherSource]);
 
   function handleCityChange(event) {
     setCity(event.target.value);
   }
-
-
 
   if (weatherData.ready) {
     return (
