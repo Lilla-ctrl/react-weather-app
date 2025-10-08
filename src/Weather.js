@@ -1,6 +1,7 @@
 import { useCallback, useState, useEffect } from "react";
 import WeatherInfo from "./WeatherInfo";
 import WeatherForecast from "./WeatherForecast";
+import WeatherTemperature from "./WeatherTemperature";
 import axios from "axios";
 import "./Weather.css";
 
@@ -8,6 +9,7 @@ export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
   const [timezoneCache, setTimezoneCache] = useState({});
+  const [unit, setUnit] = useState("celsius");
 
   async function fetchTimezone(coordinates) {
     const { latitude, longitude } = coordinates;
@@ -18,7 +20,6 @@ export default function Weather(props) {
         `https://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
       );
       const data = await res.json();
-      console.log("TimeZoneDB response:", data);
       return data.zoneName || "UTC";
     } catch (err) {
       console.error("Timezone fetch error:", err);
@@ -26,35 +27,38 @@ export default function Weather(props) {
     }
   }
 
-  async function handleResponse(response) {
-    const coordinates = response.data.coordinates;
-    const cityName = response.data.city;
+  const handleResponse = useCallback(
+    async function handleResponse(response) {
+      const coordinates = response.data.coordinates;
+      const cityName = response.data.city;
 
-    let zoneName;
+      let zoneName;
 
-    if (timezoneCache[cityName]) {
-      zoneName = timezoneCache[cityName];
-    } else {
-      zoneName = await fetchTimezone(coordinates);
+      if (timezoneCache[cityName]) {
+        zoneName = timezoneCache[cityName];
+      } else {
+        zoneName = await fetchTimezone(coordinates);
 
-      setTimezoneCache((prev) => ({
-        ...prev,
-        [cityName]: zoneName,
-      }));
-    }
+        setTimezoneCache((prev) => ({
+          ...prev,
+          [cityName]: zoneName,
+        }));
+      }
 
-    setWeatherData({
-      ready: true,
-      temperature: response.data.temperature.current,
-      wind: response.data.wind.speed,
-      humidity: response.data.temperature.humidity,
-      city: response.data.city,
-      description: response.data.condition.description,
-      icon: response.data.condition.icon,
-      coordinates,
-      timezone: zoneName,
-    });
-  }
+      setWeatherData({
+        ready: true,
+        temperature: response.data.temperature.current,
+        wind: response.data.wind.speed,
+        humidity: response.data.temperature.humidity,
+        city: response.data.city,
+        description: response.data.condition.description,
+        icon: response.data.condition.icon,
+        coordinates,
+        timezone: zoneName,
+      });
+    },
+    [timezoneCache]
+  );
 
   function search() {
     let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
@@ -72,21 +76,24 @@ export default function Weather(props) {
     navigator.geolocation.getCurrentPosition(searchLocation);
   }
 
-  const searchLocation = useCallback((position) => {
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
-    let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+  const searchLocation = useCallback(
+    (position) => {
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
+      let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
 
-    axios
-      .get(apiUrl)
-      .then(handleResponse)
-      .catch((error) => {
-        setWeatherData({ ready: false });
-        alert("Too many attempts - please try again in a moment.");
-        console.error("API error:", error);
-      });
-  }, []);
+      axios
+        .get(apiUrl)
+        .then(handleResponse)
+        .catch((error) => {
+          setWeatherData({ ready: false });
+          alert("Too many attempts - please try again in a moment.");
+          console.error("API error:", error);
+        });
+    },
+    [handleResponse]
+  );
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(searchLocation);
@@ -95,6 +102,8 @@ export default function Weather(props) {
   function handleCityChange(event) {
     setCity(event.target.value);
   }
+
+
 
   if (weatherData.ready) {
     return (
@@ -129,8 +138,8 @@ export default function Weather(props) {
             </div>
           </div>
         </form>
-        <WeatherInfo data={weatherData} />
-        <WeatherForecast data={weatherData} />
+        <WeatherInfo data={weatherData} unit={unit} setUnit={setUnit} />
+        <WeatherForecast data={weatherData} unit={unit} />
       </div>
     );
   } else {

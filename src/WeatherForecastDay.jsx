@@ -1,6 +1,8 @@
 import WeatherIcon from "./WeatherIcon";
+import convertTemperature from "./utils/convertTemperature";
 
 export default function WeatherForecastDay(props) {
+
   function formatDay() {
     let date = new Date(props.data.time * 1000);
     let day = date.getDay();
@@ -19,10 +21,10 @@ export default function WeatherForecastDay(props) {
       />{" "}
       <div className="Forecast-temperature">
         <span className="Forecast-temperature-max">
-          {Math.round(props.data.temperature.maximum)}°
+          {Math.round(convertTemperature(props.data.temperature.maximum, props.unit))}°
         </span>{" "}
         <span className="Forecast-temperature-min">
-          {Math.round(props.data.temperature.minimum)}°
+          {Math.round(convertTemperature(props.data.temperature.minimum, props.unit))}°
         </span>
       </div>
     </div>
