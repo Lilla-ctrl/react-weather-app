@@ -19,11 +19,19 @@ export default function WeatherTemperature(props) {
           : "-"}
       </span>
       <span className="unit">
-        <a href="/" onClick={showCelsius}>
+        <a
+          className={props.unit === "celsius" ? "" : "clickable"}
+          href="/"
+          onClick={showCelsius}
+        >
           °C
         </a>{" "}
         |{" "}
-        <a href="/" onClick={showFahrenheit}>
+        <a
+          className={props.unit === "fahrenheit" ? "" : "clickable"}
+          href="/"
+          onClick={showFahrenheit}
+        >
           °F
         </a>
       </span>

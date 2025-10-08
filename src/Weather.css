@@ -49,3 +49,11 @@
   line-height: 1;
   top: -34px;
 }
+
+.Weather .unit a {
+  font-weight: normal;
+}
+
+.Weather .unit a.clickable {
+  font-weight: bold;
+}
