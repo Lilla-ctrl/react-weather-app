@@ -28,7 +28,7 @@ The design is inspired by Google's weather layout, as the focus of this project 
 
 ## 🚀 Live Demo
 
-🔗 [View the project on Netlify](#)
+🔗 [View the project on Netlify](https://stellar-stardust-85a3b3.netlify.app/)
 
 ---
 
@@ -53,4 +53,4 @@ The design is inspired by Google's weather layout, as the focus of this project 
 Built as part of the SheCodes Front-End Developer program to practice React, API integration, and state management.  
 Currently expanding my skills with Next.js and other modern tools.
 
-**Portfolio:** [link here] • **GitHub:** [link here] • **LinkedIn:** [link here]
+**Portfolio:** [(https://lilla-frontend.netlify.app/)] • **GitHub:** [(https://github.com/Lilla-ctrl)] • **LinkedIn:** [(https://www.linkedin.com/in/lillatoth216/)]
