@@ -20,7 +20,7 @@ The design is inspired by Google's weather layout, as the focus of this project 
 ## 🛠️ Built With
 
 - **React** – main framework  
-- **Vanilla CSS** – styling  
+- **Vanilla CSS and Bootstrap** – styling  
 - **SheCodes Weather API** – weather data  
 - **TimeZoneDB API** – local time and location data  
 
