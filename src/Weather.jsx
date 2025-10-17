@@ -150,6 +150,6 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    return "Loading...";
+    return "One moment, getting your forecast 🌤️";
   }
 }
