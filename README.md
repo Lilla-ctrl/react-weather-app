@@ -4,6 +4,9 @@ A simple and responsive weather application that displays the current weather co
 
 The design is inspired by Google's weather layout, as the focus of this project was functionality and API integration rather than UI design.  
 
+<img width="1920" height="1080" alt="weather-screenshot" src="https://github.com/user-attachments/assets/17fcdba2-9583-4447-aea0-5d8d8b2e749d" />
+
+
 ---
 
 ## ✨ Features
