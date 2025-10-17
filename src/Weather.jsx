@@ -14,7 +14,6 @@ export default function Weather(props) {
   async function fetchTimezone(coordinates) {
     const { latitude, longitude } = coordinates;
     const timezoneApiKey = process.env.REACT_APP_TIMEZONE_API_KEY;
-    console.log("Timezone API key:", timezoneApiKey);
 
     try {
       const res = await fetch(
@@ -62,8 +61,8 @@ export default function Weather(props) {
   );
 
   function search() {
-    let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${weatherApiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
 
@@ -83,8 +82,8 @@ export default function Weather(props) {
     (position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
-      let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
-      let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+      const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+      let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${weatherApiKey}&units=metric`;
 
       axios
         .get(apiUrl)
