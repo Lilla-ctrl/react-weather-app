@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function WeatherIcon(props) {
   const imgsrc = `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${props.code}.png`;
 

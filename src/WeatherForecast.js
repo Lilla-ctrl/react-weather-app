@@ -12,9 +12,9 @@ export default function WeatherForecast(props) {
   }, [props.data.city]);
 
   function search() {
-    let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
+    const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
     let city = props.data.city;
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${weatherApiKey}`;
     axios.get(apiUrl).then(handleForecastResponse);
   }
   function handleForecastResponse(response) {

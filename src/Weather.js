@@ -13,11 +13,11 @@ export default function Weather(props) {
 
   async function fetchTimezone(coordinates) {
     const { latitude, longitude } = coordinates;
-    const apiKey = "XY4MU30QAOSW";
+    const timezoneApiKey = process.env.REACT_APP_TIMEZONE_API_KEY;
 
     try {
       const res = await fetch(
-        `https://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
+        `https://api.timezonedb.com/v2.1/get-time-zone?key=${timezoneApiKey}&format=json&by=position&lat=${latitude}&lng=${longitude}`
       );
       const data = await res.json();
       return data.zoneName || "UTC";
@@ -111,7 +111,6 @@ export default function Weather(props) {
     return (
       <div className="Weather">
         <form onSubmit={handleSubmit} className="mt-3">
-
           {/* Search input row */}
           <div className="row g-2">
             <div className="col-12 col-md-6 d-flex justify-content-center justify-content-md-start">

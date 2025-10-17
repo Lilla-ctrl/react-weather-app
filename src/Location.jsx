@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function Location() {
-  let apiKey = "3et61975bb6d4a4foabfddbded4a0a8e";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${weatherApiKey}&units=metric`;
 
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
