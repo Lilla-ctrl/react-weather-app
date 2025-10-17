@@ -14,6 +14,7 @@ export default function Weather(props) {
   async function fetchTimezone(coordinates) {
     const { latitude, longitude } = coordinates;
     const timezoneApiKey = process.env.REACT_APP_TIMEZONE_API_KEY;
+    console.log("Timezone API key:", timezoneApiKey);
 
     try {
       const res = await fetch(

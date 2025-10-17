@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function Location() {
   const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+  console.log("Weather API key:", weatherApiKey);
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${weatherApiKey}&units=metric`;
 
   const [location, setLocation] = useState(null);
@@ -19,13 +20,11 @@ function Location() {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     setLocation({ latitude, longitude });
-    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
         setWeather(data);
-        console.log(data);
       })
       .catch((error) => console.log(error));
   }
@@ -39,7 +38,7 @@ function Location() {
       {!location ? (
         <button onClick={handleLocationClick}>Get Location</button>
       ) : null}
-      {location && !weather ? <p>Loading weather data...</p> : null}
+      {location && !weather ? <p>Waiting for location...</p> : null}
       {weather ? (
         <div>
           <p>Location: {weather.name}</p>
