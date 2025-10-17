@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# 🌤️ React Weather App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple and responsive weather application that displays the current weather conditions and a 5-day forecast for any city. It can automatically detect your location using geolocation and show local weather details.  
 
-## Available Scripts
+The design is inspired by Google's weather layout, as the focus of this project was functionality and API integration rather than UI design.  
 
-In the project directory, you can run:
+<img width="1920" height="1080" alt="Screenshot of the application, showing current weather in Sydney" src="https://github.com/user-attachments/assets/17fcdba2-9583-4447-aea0-5d8d8b2e749d" />
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Features
 
-### `npm test`
+- Search weather by city  
+- Display current temperature, description, wind, humidity, and weather icons (changing by day and night)
+- Geolocation support for current city weather  
+- 5-day weather forecast  
+- Celsius/Fahrenheit conversion for both current weather and forecast  
+- Responsive layout  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Built With
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React** – main framework  
+- **Vanilla CSS and Bootstrap** – styling  
+- **SheCodes Weather API** – weather data  
+- **TimeZoneDB API** – local time and location data  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 Live Demo
 
-### `npm run eject`
+🔗 [View the project on Netlify](https://stellar-stardust-85a3b3.netlify.app/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 💡 What I Learned
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Working with APIs and managing multiple API calls  
+- Handling asynchronous data in React  
+- Managing component state and props  
+- Using geolocation in the browser  
+- Implementing temperature unit conversions  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🔮 Future Improvements
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Add dark mode
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 👩‍💻 About
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Built as part of the SheCodes Front-End Developer program to practice React, API integration, and state management.  
+Currently expanding my skills with Next.js and other modern tools.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Portfolio](https://lilla-frontend.netlify.app/) • [GitHub](https://github.com/Lilla-ctrl) • [LinkedIn](https://www.linkedin.com/in/lillatoth216/)
